@@ -9,6 +9,14 @@
 #include <cstdint>
 
 class bankAccount {
+public:
+    bankAccount();
+
+    void changeChipsBy(int64_t num);
+
+    void setChips(int64_t num);
+
+    [[nodiscard]] int64_t getChips() const;
 
 private:
     int64_t m_chips;
