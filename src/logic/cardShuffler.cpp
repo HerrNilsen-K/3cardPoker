@@ -7,8 +7,9 @@
 
 hand cardShuffler::randomCards(size_t number) {
     hand result {};
-    result.cType = static_cast<cardType>(m_rNum.randomNumber(static_cast<short>(cardType::BEGIN), static_cast<short>(cardType::END)));
-    std::cout << (int)result.cType << std::endl;
+    //result.cType = static_cast<cardType>(m_rNum.randomNumber(static_cast<short>(cardType::BEGIN), static_cast<short>(cardType::END)));
+    result.cType = (cardType)m_rNum.randomNumber(0, 3);
+    std::cout << (short)result.cType << std::endl;
     return result;
 }
 

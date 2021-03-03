@@ -12,13 +12,14 @@ template<class T>
 class randomGenerator {
 private:
     std::random_device m_rd;
-    std::mt19937 m_mt;
+    std::mt19937 m_mt {m_rd()};
 
 public:
-    randomGenerator() : m_mt(m_rd()) {}
+    randomGenerator()  {}
 
-    T randomNumber(T min, T max) {
-        return std::uniform_int_distribution<T>{static_cast<size_t >(min), static_cast<size_t >(max)}(m_mt);
+    short randomNumber(T min, T max) {
+        static std::uniform_int_distribution<short> result(static_cast<short>(min), static_cast<short>(max));
+        return result(m_mt);
     }
 };
 
