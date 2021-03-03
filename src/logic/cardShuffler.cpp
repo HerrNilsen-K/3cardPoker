@@ -6,9 +6,11 @@
 #include <array>
 #include "cardShuffler.h"
 
-hand cardShuffler::randomCards(size_t number) {
-    hand result{};
-    result.cType = (cardType) m_rNum.randomNumber(0, 3);
+std::vector<hand> cardShuffler::randomCards(size_t number) {
+    std::vector<hand> result(number);
+    for (auto &&x : result) {
+        x.cType = (cardType) m_rNum.randomNumber(0, 3);
+    }
     /*
     std::array<int, 4> count{};
     for (int i = 0; i < 4000; ++i) {

@@ -1,0 +1,12 @@
+loop:
+    player sets his bet
+
+    dealer draws 3 cards
+    player draws 3 cards
+
+    player gets shown his cards
+    player decides to play or not
+
+    game checks who won
+    player gets the chips he won
+repeat

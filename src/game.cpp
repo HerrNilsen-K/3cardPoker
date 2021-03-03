@@ -5,13 +5,18 @@
 #include "game.h"
 #include "logic/cardShuffler.h"
 #include "logic/hand.hpp"
+#include "player/bankAccount.hpp"
 
 void game::run() {
     bool gameIsRrunning = true;
     cardShuffler cs;
+    bankAccount playersBank;
+
     while (gameIsRrunning){
-        hand dealer = cs.randomCards(3);
-        hand player = cs.randomCards(3);
+
+
+        std::vector<hand> dealer = cs.randomCards(3);
+        std::vector<hand> player = cs.randomCards(3);
 
         gameIsRrunning = false;
     }

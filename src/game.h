@@ -9,7 +9,7 @@
 class game {
 public:
     game() = default;
-    void run();
+    static void run();
 };
 
 

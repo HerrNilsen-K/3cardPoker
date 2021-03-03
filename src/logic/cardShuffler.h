@@ -17,7 +17,7 @@ private:
 public:
     cardShuffler();
 
-    hand randomCards(size_t number = 1);
+    std::vector<hand> randomCards(size_t number = 1);
 };
 
 
