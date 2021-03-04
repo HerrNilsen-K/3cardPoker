@@ -20,7 +20,6 @@ public:
 
     T randomNumber(T min, T max) {
         std::uniform_int_distribution<T> result(static_cast<int64_t>(min), static_cast<int64_t>(max));
-        std::cout << m_rd() << std::endl;
         return result(m_mt);
     }
 };

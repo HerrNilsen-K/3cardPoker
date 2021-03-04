@@ -12,9 +12,7 @@ void game::run() {
     cardShuffler cs;
     bankAccount playersBank;
 
-    while (gameIsRrunning){
-
-
+    while (gameIsRrunning) {
         std::vector<hand> dealer = cs.randomCards(3);
         std::vector<hand> player = cs.randomCards(3);
 

@@ -19,7 +19,12 @@ public:
     [[nodiscard]] int64_t getChips() const;
 
 private:
+    void setFile() const;
+
+private:
     int64_t m_chips;
+
+    const char *const m_fileName = "playersBankAccount.cps";
 
 };
 
