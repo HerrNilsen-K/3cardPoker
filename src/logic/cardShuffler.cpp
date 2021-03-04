@@ -9,8 +9,10 @@
 std::vector<hand> cardShuffler::randomCards(size_t number) {
     std::vector<hand> result(number);
     for (auto &&x : result) {
-        x.cType = (cardType) m_rNum.randomNumber(0, 3);
+        x.cType = (cardType) m_rNum.randomNumber((short) cardType::BEGIN, (short) cardType::END);
+        x.cValue = (cardValue) m_rNum.randomNumber((short) cardValue::BEGIN, (short) cardValue::END);
     }
+    std::cout << (short)result[0].cType << ' ' << (short)result[0].cValue << std::endl;
     /*
     std::array<int, 4> count{};
     for (int i = 0; i < 4000; ++i) {
