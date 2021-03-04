@@ -6,13 +6,17 @@
 #include "logic/cardShuffler.h"
 #include "logic/hand.hpp"
 #include "player/bankAccount.hpp"
+#include "player/bets.hpp"
 
 void game::run() {
     bool gameIsRrunning = true;
     cardShuffler cs;
     bankAccount playersBank;
+    bets bet;
 
     while (gameIsRrunning) {
+
+
         std::vector<hand> dealer = cs.randomCards(3);
         std::vector<hand> player = cs.randomCards(3);
 
