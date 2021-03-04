@@ -7,6 +7,7 @@
 
 
 #include <random>
+#include <iostream>
 
 template<class T>
 class randomGenerator {
@@ -17,8 +18,9 @@ private:
 public:
     randomGenerator()  {}
 
-    short randomNumber(T min, T max) {
-        static std::uniform_int_distribution<short> result(static_cast<short>(min), static_cast<short>(max));
+    T randomNumber(T min, T max) {
+        std::uniform_int_distribution<T> result(static_cast<int64_t>(min), static_cast<int64_t>(max));
+        std::cout << m_rd() << std::endl;
         return result(m_mt);
     }
 };
