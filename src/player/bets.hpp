@@ -17,7 +17,7 @@ public:
                   const std::optional<uint64_t> &sixCard = {0});
 
     void setBets(const std::optional<uint64_t> &ante, const std::optional<uint64_t> &pairPlus,
-                 const std::optional<uint64_t> &sixCard ;
+                 const std::optional<uint64_t> &sixCard);
 
     [[nodiscard]]
 
