@@ -8,12 +8,16 @@
 
 #include <optional>
 #include <cstdint>
+#include "../player/bankAccount.hpp"
 
 class consoleInput {
 public:
-    void betAnteImplementation(std::optional<int64_t> &ante);
-    void betPairPlusImplementation(std::optional<int64_t> &pairPlus);
-    void betSixCardImplementation(std::optional<int64_t> &sixCard);
+    void betAnteImplementation(std::optional<int64_t> &ante, bankAccount &account);
+    void betPairPlusImplementation(std::optional<int64_t> &pairPlus, bankAccount &account);
+    void betSixCardImplementation(std::optional<int64_t> &sixCard, bankAccount &account);
+
+private:
+    int64_t m_ante, m_pairPlus, m_sixCard;
 
 };
 

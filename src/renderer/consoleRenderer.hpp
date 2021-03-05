@@ -9,12 +9,16 @@
 
 class consoleRenderer {
 
-public:
+protected:
     void betsImplementation();
 
     void betAnteImplementation();
+    void rebetAnteImplementation();
+
     void betPairPlusImplementation();
     void betSixCardImplementation();
+
+    void currentChipsImplementation(int64_t chips);
 
 private:
     void drawLine();

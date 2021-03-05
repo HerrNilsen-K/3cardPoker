@@ -8,14 +8,18 @@
 
 #include "consoleRenderer.hpp"
 
-class renderer : public consoleRenderer{
+class renderer : protected consoleRenderer{
 
 public:
     void bets();
 
     void betAnte();
+    void rebetAnte();
+
     void betPairPlus();
     void betSixCard();
+
+    void currentChips(int64_t chips);
 };
 
 

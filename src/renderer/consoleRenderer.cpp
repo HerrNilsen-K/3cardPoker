@@ -6,7 +6,6 @@
 #include "consoleRenderer.hpp"
 
 void consoleRenderer::betsImplementation() {
-    drawLine();
     std::cout << std::endl << "Please place your betsImplementation: " << std::endl;
     drawLine();
     std::cout << std::endl;
@@ -27,4 +26,13 @@ void consoleRenderer::betPairPlusImplementation() {
 
 void consoleRenderer::betSixCardImplementation() {
     std::cout << "Six Card: ";
+}
+
+void consoleRenderer::currentChipsImplementation(int64_t chips) {
+    drawLine();
+    std::cout << std::endl << "You currently have: " << chips << " chips" << std::endl;
+}
+
+void consoleRenderer::rebetAnteImplementation() {
+    //std::cout << "";
 }

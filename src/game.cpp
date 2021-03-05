@@ -21,14 +21,17 @@ void game::run() {
 
     while (gameIsRrunning) {
         //Take in the players betsImplementation
-        render.betsImplementation();
-        std::optional<int64_t> ante = {0}, pairPlus = {0}, sixCard = {0};
+        render.currentChips(playersBank.getChips());
+        render.bets();
+
+        std::optional<int64_t> ante, pairPlus , sixCard;
         render.betAnte();
-        in.betAnte(ante);
+        in.betAnte(ante, playersBank);
         render.betPairPlus();
-        in.betPairPlus(pairPlus);
+        in.betPairPlus(pairPlus, playersBank);
         render.betSixCard();
-        in.betSixCard(sixCard);
+        in.betSixCard(sixCard, playersBank);
+
 
         std::vector<hand> dealer = cs.randomCards(3);
         std::vector<hand> player = cs.randomCards(3);

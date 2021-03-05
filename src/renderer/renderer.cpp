@@ -19,3 +19,11 @@ void renderer::betPairPlus() {
 void renderer::betSixCard() {
     betSixCardImplementation();
 }
+
+void renderer::currentChips(int64_t chips) {
+    currentChipsImplementation(chips);
+}
+
+void renderer::rebetAnte() {
+    rebetAnteImplementation();
+}
