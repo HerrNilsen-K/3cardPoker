@@ -10,7 +10,11 @@
 class consoleRenderer {
 
 public:
-    void bets();
+    void betsImplementation();
+
+    void betAnteImplementation();
+    void betPairPlusImplementation();
+    void betSixCardImplementation();
 
 private:
     void drawLine();

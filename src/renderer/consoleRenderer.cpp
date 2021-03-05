@@ -5,13 +5,26 @@
 #include <iostream>
 #include "consoleRenderer.hpp"
 
-void consoleRenderer::bets() {
+void consoleRenderer::betsImplementation() {
     drawLine();
-    std::cout << std::endl << "Please place your bets: " << std::endl;
+    std::cout << std::endl << "Please place your betsImplementation: " << std::endl;
     drawLine();
+    std::cout << std::endl;
 }
 
 void consoleRenderer::drawLine() {
-    for(int i = 0; i < consoleLength; ++i)
+    for (int i = 0; i < consoleLength; ++i)
         std::cout << '-';
+}
+
+void consoleRenderer::betAnteImplementation() {
+    std::cout << "Ante: ";
+}
+
+void consoleRenderer::betPairPlusImplementation() {
+    std::cout << "Pair Plus: ";
+}
+
+void consoleRenderer::betSixCardImplementation() {
+    std::cout << "Six Card: ";
 }

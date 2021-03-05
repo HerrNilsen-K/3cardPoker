@@ -3,3 +3,19 @@
 //
 
 #include "renderer.hpp"
+
+void renderer::betAnte() {
+    betAnteImplementation();
+}
+
+void renderer::bets() {
+    betsImplementation();
+}
+
+void renderer::betPairPlus() {
+    betPairPlusImplementation();
+}
+
+void renderer::betSixCard() {
+    betSixCardImplementation();
+}

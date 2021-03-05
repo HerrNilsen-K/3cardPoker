@@ -10,6 +10,12 @@
 
 class renderer : public consoleRenderer{
 
+public:
+    void bets();
+
+    void betAnte();
+    void betPairPlus();
+    void betSixCard();
 };
 
 
