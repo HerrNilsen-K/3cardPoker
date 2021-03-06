@@ -24,7 +24,7 @@ void game::run() {
 
 
     while (gameIsRrunning) {
-        //Take in the players betsImplementation
+        //Take in the players bets
         render.currentChips(playersBank.getChips());
         render.bets();
 
@@ -35,9 +35,10 @@ void game::run() {
         in.betPairPlus(pairPlus, playersBank);
         render.betSixCard();
         in.betSixCard(sixCard, playersBank);
+        playersBank.changeChipsBy((-ante.value()) + (-pairPlus.value()) + - (sixCard.value()));
 
-        //This need to be reworked
 
+        //Spread the cards
         deck.shuffleDeck();
         std::vector<hand> dealer = deck.drawCards(3);
         std::vector<hand> player = deck.drawCards(3);

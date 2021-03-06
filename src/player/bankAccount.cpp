@@ -20,6 +20,8 @@ bankAccount::bankAccount()
     if (file.tellg() == 0) {
         file << m_chips;
     }
+    file.seekg(0);
+    file >> m_chips;
 
     file.close();
 }
@@ -49,6 +51,6 @@ void bankAccount::setFile() const {
     file.close();
 
     file.open(m_fileName, std::fstream::out | std::fstream::app);
-    file << chips + m_chips;
+    file << m_chips;
     file.close();
 }
