@@ -24,6 +24,6 @@ void renderer::currentChips(int64_t chips) {
     currentChipsImplementation(chips);
 }
 
-void renderer::rebetAnte() {
-    rebetAnteImplementation();
+void renderer::showPlayersCards(std::vector<hand> &cards) {
+    showPlayersCardsImplementation(cards);
 }

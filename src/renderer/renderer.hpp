@@ -6,7 +6,9 @@
 #define INC_3CARDPOKER_RENDERER_HPP
 
 
+#include <vector>
 #include "consoleRenderer.hpp"
+#include "../logic/hand.hpp"
 
 class renderer : protected consoleRenderer{
 
@@ -14,12 +16,13 @@ public:
     void bets();
 
     void betAnte();
-    void rebetAnte();
 
     void betPairPlus();
     void betSixCard();
 
     void currentChips(int64_t chips);
+
+    void showPlayersCards(std::vector<hand> &cards);
 };
 
 

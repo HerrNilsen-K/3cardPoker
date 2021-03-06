@@ -33,6 +33,6 @@ void consoleRenderer::currentChipsImplementation(int64_t chips) {
     std::cout << std::endl << "You currently have: " << chips << " chips" << std::endl;
 }
 
-void consoleRenderer::rebetAnteImplementation() {
-    //std::cout << "";
+void consoleRenderer::showPlayersCardsImplementation(std::vector<hand> &cards) {
+
 }

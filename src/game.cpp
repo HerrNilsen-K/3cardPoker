@@ -10,6 +10,7 @@
 #include "player/bets.hpp"
 #include "renderer/renderer.hpp"
 #include "input/input.hpp"
+#include "cards/cardsDeck.hpp"
 
 
 void game::run() {
@@ -19,6 +20,7 @@ void game::run() {
     bets bet;
     renderer render;
     input in;
+    cardsDeck deck;
 
 
     while (gameIsRrunning) {
@@ -34,9 +36,13 @@ void game::run() {
         render.betSixCard();
         in.betSixCard(sixCard, playersBank);
 
-
+        //This need to be reworked
         std::vector<hand> dealer = cs.randomCards(3);
         std::vector<hand> player = cs.randomCards(3);
+
+        render.showPlayersCards(player);
+
+
 
         gameIsRrunning = false;
     }

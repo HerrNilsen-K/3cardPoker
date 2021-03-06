@@ -6,6 +6,8 @@
 #define INC_3CARDPOKER_CONSOLERENDERER_HPP
 
 #include <cstdint>
+#include <vector>
+#include "../logic/hand.hpp"
 
 class consoleRenderer {
 
@@ -13,12 +15,13 @@ protected:
     void betsImplementation();
 
     void betAnteImplementation();
-    void rebetAnteImplementation();
 
     void betPairPlusImplementation();
     void betSixCardImplementation();
 
     void currentChipsImplementation(int64_t chips);
+
+    void showPlayersCardsImplementation(std::vector<hand> &cards);
 
 private:
     void drawLine();
