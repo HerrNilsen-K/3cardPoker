@@ -34,7 +34,7 @@ struct hand {
     cardType cType;
 };
 
-static std::tuple<std::string, short> getReadableHand(hand card) {
+static std::tuple<std::string, std::string> getReadableHand(hand card) {
     static std::unordered_map<cardType, std::string> type = {
             {cardType::CLUB,    "Club"},
             {cardType::SPADES,  "Spades"},
@@ -42,20 +42,20 @@ static std::tuple<std::string, short> getReadableHand(hand card) {
             {cardType::DIAMOND, "Diamond"}
     };
 
-    static std::unordered_map<cardValue, short> value = {
-            {cardValue::TWO,   2},
-            {cardValue::THREE, 3},
-            {cardValue::FOUR,  4},
-            {cardValue::FIVE,  5},
-            {cardValue::SIX,   6},
-            {cardValue::SEVEN, 7},
-            {cardValue::EIGHT, 8},
-            {cardValue::NINE,  9},
-            {cardValue::TEN,   10},
-            {cardValue::JACK,  11},
-            {cardValue::QUEEN, 12},
-            {cardValue::KING,  13},
-            {cardValue::ACE,   14}
+    static std::unordered_map<cardValue, std::string> value = {
+            {cardValue::TWO,   "2"},
+            {cardValue::THREE, "3"},
+            {cardValue::FOUR,  "4"},
+            {cardValue::FIVE,  "5"},
+            {cardValue::SIX,   "6"},
+            {cardValue::SEVEN, "7"},
+            {cardValue::EIGHT, "8"},
+            {cardValue::NINE,  "9"},
+            {cardValue::TEN,   "10"},
+            {cardValue::JACK,  "Jack"},
+            {cardValue::QUEEN, "Queen"},
+            {cardValue::KING,  "King"},
+            {cardValue::ACE,   "Ace"}
     };
 
     return std::make_tuple(type[card.cType], value[card.cValue]);

@@ -13,7 +13,7 @@ cardsDeck::cardsDeck() {
     //Create a poker card deck consisting of 52 cards
     for (int i = static_cast<int>(cardType::BEGIN); i < static_cast<int>(cardType::END); ++i) {
         for (int j = static_cast<int>(cardValue::BEGIN); j < static_cast<int>(cardValue::END); ++j) {
-            hand temp{static_cast<cardValue>(i), static_cast<cardType>(j)};
+            hand temp{static_cast<cardValue>(j), static_cast<cardType>(i)};
             m_deck.push_back(temp);
         }
     }

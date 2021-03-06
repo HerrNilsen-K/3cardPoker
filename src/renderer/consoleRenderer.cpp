@@ -36,8 +36,8 @@ void consoleRenderer::currentChipsImplementation(int64_t chips) {
 void consoleRenderer::showPlayersCardsImplementation(std::vector<hand> &cards) {
     std::cout << "Your cards: ";
     for (auto &&i : cards) {
-        std::tuple<std::string, short> card = getReadableHand(i);
-        std::cout << std::get<1>(card) << " of " << std::get<0>(card) << ' ';
+        std::tuple<std::string, std::string> card = getReadableHand(i);
+        std::cout << std::get<1>(card) << " of " << std::get<0>(card) << ", " ;
     }
     std::cout << std::endl;
 }
