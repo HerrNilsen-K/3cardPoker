@@ -6,15 +6,14 @@
 #define INC_3CARDPOKER_HAND_HPP
 
 enum class cardValue {
-    ZERO = 0,
-    ONE, TWO, THREE,
-    FOUR, FIVE, SIX,
-    SEVEN, EIGHT, NINE, TEN,
+    TWO = 0, THREE, FOUR,
+    FIVE, SIX, SEVEN,
+    EIGHT, NINE, TEN,
 
     JACK, QUEEN, KING, ACE,
 
-    BEGIN = ZERO,
-    END = ACE
+    BEGIN = TWO,
+    END = ACE + 1
 };
 
 enum class cardType {
@@ -24,7 +23,7 @@ enum class cardType {
     DIAMOND,
 
     BEGIN = CLUB,
-    END = DIAMOND
+    END = DIAMOND + 1
 };
 
 struct hand {

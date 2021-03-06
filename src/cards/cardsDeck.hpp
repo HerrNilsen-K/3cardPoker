@@ -6,12 +6,20 @@
 #define INC_3CARDPOKER_CARDSDECK_HPP
 
 
-#include <array>
+#include <queue>
 #include "../logic/hand.hpp"
 
 class cardsDeck {
 private:
-    std::array<hand, 52> m_deck;
+
+    //Hold information about the card and if it has already been drawn
+    std::deque<hand> m_deck;
+public:
+    cardsDeck();
+
+    void shuffleDeck();
+
+    std::vector<hand> drawCards(int n);
 };
 
 

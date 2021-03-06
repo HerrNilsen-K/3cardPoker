@@ -37,8 +37,13 @@ void game::run() {
         in.betSixCard(sixCard, playersBank);
 
         //This need to be reworked
-        std::vector<hand> dealer = cs.randomCards(3);
-        std::vector<hand> player = cs.randomCards(3);
+
+        deck.shuffleDeck();
+        std::vector<hand> dealer = deck.drawCards(3);
+        std::vector<hand> player = deck.drawCards(52);
+        for(auto i : player){
+            std::cout << static_cast<int>(i.cType) << ' ' << static_cast<int>(i.cValue) << ',';
+        }
 
         render.showPlayersCards(player);
 
