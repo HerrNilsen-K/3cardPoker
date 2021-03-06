@@ -5,6 +5,9 @@
 #ifndef INC_3CARDPOKER_HAND_HPP
 #define INC_3CARDPOKER_HAND_HPP
 
+#include <string>
+#include <unordered_map>
+
 enum class cardValue {
     TWO = 0, THREE, FOUR,
     FIVE, SIX, SEVEN,
@@ -18,7 +21,7 @@ enum class cardValue {
 
 enum class cardType {
     CLUB = 0,
-    SPACE,
+    SPADES,
     HEART,
     DIAMOND,
 
@@ -30,6 +33,33 @@ struct hand {
     cardValue cValue;
     cardType cType;
 };
+
+static std::tuple<std::string, short> getReadableHand(hand card) {
+    static std::unordered_map<cardType, std::string> type = {
+            {cardType::CLUB,    "Club"},
+            {cardType::SPADES,  "Spades"},
+            {cardType::HEART,   "Heart"},
+            {cardType::DIAMOND, "Diamond"}
+    };
+
+    static std::unordered_map<cardValue, short> value = {
+            {cardValue::TWO,   2},
+            {cardValue::THREE, 3},
+            {cardValue::FOUR,  4},
+            {cardValue::FIVE,  5},
+            {cardValue::SIX,   6},
+            {cardValue::SEVEN, 7},
+            {cardValue::EIGHT, 8},
+            {cardValue::NINE,  9},
+            {cardValue::TEN,   10},
+            {cardValue::JACK,  11},
+            {cardValue::QUEEN, 12},
+            {cardValue::KING,  13},
+            {cardValue::ACE,   14}
+    };
+
+    return std::make_tuple(type[card.cType], value[card.cValue]);
+}
 
 
 #endif //INC_3CARDPOKER_HAND_HPP

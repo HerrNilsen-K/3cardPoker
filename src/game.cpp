@@ -40,10 +40,7 @@ void game::run() {
 
         deck.shuffleDeck();
         std::vector<hand> dealer = deck.drawCards(3);
-        std::vector<hand> player = deck.drawCards(52);
-        for(auto i : player){
-            std::cout << static_cast<int>(i.cType) << ' ' << static_cast<int>(i.cValue) << ',';
-        }
+        std::vector<hand> player = deck.drawCards(3);
 
         render.showPlayersCards(player);
 
