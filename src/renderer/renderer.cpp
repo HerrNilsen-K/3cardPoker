@@ -24,6 +24,14 @@ void renderer::currentChips(int64_t chips) {
     currentChipsImplementation(chips);
 }
 
-void renderer::showPlayersCards(std::vector<hand> &cards) {
+void renderer::showPlayersCards(std::array<hand, 3> &cards) {
     showPlayersCardsImplementation(cards);
+}
+
+void renderer::doesPlay() {
+    doesPlayImplementation();
+}
+
+void renderer::showDealersCards(std::array<hand, 3> &cards) {
+    showDealersCardsImplementation(cards);
 }

@@ -10,7 +10,7 @@
 #include "consoleRenderer.hpp"
 #include "../logic/hand.hpp"
 
-class renderer : protected consoleRenderer{
+class renderer : protected consoleRenderer {
 
 public:
     void bets();
@@ -18,11 +18,16 @@ public:
     void betAnte();
 
     void betPairPlus();
+
     void betSixCard();
 
     void currentChips(int64_t chips);
 
-    void showPlayersCards(std::vector<hand> &cards);
+    void showPlayersCards(std::array<hand, 3> &cards);
+
+    void doesPlay();
+
+    void showDealersCards(std::array<hand, 3> &cards);
 };
 
 

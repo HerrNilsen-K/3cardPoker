@@ -30,3 +30,9 @@ void consoleInput::betSixCardImplementation(std::optional<int64_t> &sixCard, ban
         m_sixCard = sixCard.value();
     } while (account.getChips() < sixCard.value() + m_pairPlus + m_ante * 2);
 }
+
+void consoleInput::doesPlayImplementation(char &c) {
+    do {
+        std::cin >> c;
+    } while (c != 'y' && c != 'Y' && c != 'n' && c != 'N');
+}

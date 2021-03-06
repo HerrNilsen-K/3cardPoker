@@ -11,6 +11,7 @@
 #include "renderer/renderer.hpp"
 #include "input/input.hpp"
 #include "cards/cardsDeck.hpp"
+#include "logic/calculateProfit.hpp"
 
 
 void game::run() {
@@ -21,6 +22,7 @@ void game::run() {
     renderer render;
     input in;
     cardsDeck deck;
+    calculateProfit profit;
 
 
     while (gameIsRrunning) {
@@ -28,23 +30,42 @@ void game::run() {
         render.currentChips(playersBank.getChips());
         render.bets();
 
-        std::optional<int64_t> ante, pairPlus , sixCard;
+        std::optional<int64_t> ante, pairPlus, sixCard;
         render.betAnte();
         in.betAnte(ante, playersBank);
         render.betPairPlus();
         in.betPairPlus(pairPlus, playersBank);
         render.betSixCard();
         in.betSixCard(sixCard, playersBank);
-        playersBank.changeChipsBy((-ante.value()) + (-pairPlus.value()) + - (sixCard.value()));
+        playersBank.changeChipsBy((-ante.value()) + (-pairPlus.value()) + -(sixCard.value()));
 
 
         //Spread the cards
         deck.shuffleDeck();
-        std::vector<hand> dealer = deck.drawCards(3);
-        std::vector<hand> player = deck.drawCards(3);
+        std::array<hand, 3> dealer{};
+        std::vector<hand> tempDealer = deck.drawCards(3);
+        std::copy(tempDealer.begin(), tempDealer.end(), dealer.data());
+        std::array<hand, 3> player{};
+        std::vector<hand> tempPlayer = deck.drawCards(3);
+        std::copy(tempPlayer.begin(), tempPlayer.end(), player.data());
 
         render.showPlayersCards(player);
+        render.doesPlay();
 
+
+        //Player devides to doesPlay or not
+        char doesPlay;
+        in.doesPlay(doesPlay);
+        bool plays = (doesPlay == 'y' || doesPlay == 'Y');
+        render.showDealersCards(dealer);
+
+        //Calculate players profit
+        int64_t anteProfit;
+        if (plays) {
+            anteProfit = profit.ante(ante, player);
+        } else {
+
+        }
 
 
         gameIsRrunning = false;

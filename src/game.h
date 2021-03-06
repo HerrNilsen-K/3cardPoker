@@ -6,6 +6,9 @@
 #define INC_3CARDPOKER_GAME_H
 
 
+#include <vector>
+#include <array>
+
 class game {
 public:
     game() = default;

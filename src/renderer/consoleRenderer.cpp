@@ -33,8 +33,22 @@ void consoleRenderer::currentChipsImplementation(int64_t chips) {
     std::cout << std::endl << "You currently have: " << chips << " chips" << std::endl;
 }
 
-void consoleRenderer::showPlayersCardsImplementation(std::vector<hand> &cards) {
+void consoleRenderer::showPlayersCardsImplementation(std::array<hand, 3> &cards) {
     std::cout << "Your cards: ";
+    for (int j = 0; auto &&i : cards) {
+        std::tuple<std::string, std::string> card = getReadableHand(i);
+        std::cout << std::get<1>(card) << " of " << std::get<0>(card) << (j == cards.size() - 1 ? "." : ", ");
+        ++j;
+    }
+    std::cout << std::endl;
+}
+
+void consoleRenderer::doesPlayImplementation() {
+    std::cout << "Do you want to play? Y/N: ";
+}
+
+void consoleRenderer::showDealersCardsImplementation(std::array<hand, 3>& cards) {
+    std::cout << "Dealers cards: ";
     for (int j = 0; auto &&i : cards) {
         std::tuple<std::string, std::string> card = getReadableHand(i);
         std::cout << std::get<1>(card) << " of " << std::get<0>(card) << (j == cards.size() - 1 ? "." : ", ");

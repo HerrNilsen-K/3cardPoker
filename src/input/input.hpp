@@ -17,6 +17,7 @@ public:
     void betPairPlus(std::optional<int64_t> &pairPlus, bankAccount &account);
     void betSixCard(std::optional<int64_t> &sixCard, bankAccount &account);
 
+    void doesPlay(char &c);
 };
 
 

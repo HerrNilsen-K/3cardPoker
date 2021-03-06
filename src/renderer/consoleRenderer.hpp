@@ -21,7 +21,10 @@ protected:
 
     void currentChipsImplementation(int64_t chips);
 
-    void showPlayersCardsImplementation(std::vector<hand> &cards);
+    void showPlayersCardsImplementation(std::array<hand, 3> &cards);
+    void showDealersCardsImplementation(std::array<hand, 3> &cards);
+
+    void doesPlayImplementation();
 
 private:
     void drawLine();

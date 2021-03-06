@@ -16,6 +16,8 @@ public:
     void betPairPlusImplementation(std::optional<int64_t> &pairPlus, bankAccount &account);
     void betSixCardImplementation(std::optional<int64_t> &sixCard, bankAccount &account);
 
+    void doesPlayImplementation(char &c);
+
 private:
     int64_t m_ante, m_pairPlus, m_sixCard;
 

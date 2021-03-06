@@ -16,3 +16,7 @@ void input::betPairPlus(std::optional<int64_t> &pairPlus, bankAccount &account) 
 void input::betSixCard(std::optional<int64_t> &sixCard, bankAccount &account) {
     betSixCardImplementation(sixCard, account);
 }
+
+void input::doesPlay(char &c) {
+    doesPlayImplementation(c);
+}
