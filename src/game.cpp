@@ -2,6 +2,7 @@
 // Created by Karl on 03.03.2021.
 //
 
+#include <array>
 #include "game.h"
 #include "logic/cardShuffler.h"
 #include "logic/hand.hpp"
@@ -9,6 +10,7 @@
 #include "player/bets.hpp"
 #include "renderer/renderer.hpp"
 #include "input/input.hpp"
+
 
 void game::run() {
     bool gameIsRrunning = true;
