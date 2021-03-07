@@ -63,9 +63,17 @@ void game::run() {
         int64_t anteProfit;
         if (plays) {
             anteProfit = profit.ante(ante, player);
-        } else {
-
         }
+        std::array<hand, 3> temp = {
+                {
+                        {cardValue::NINE, cardType::HEART},
+                        {cardValue::TWO, cardType::SPADES},
+                        {cardValue::SEVEN, cardType::SPADES}
+                }
+        };
+
+        //paiPlusProfit = profit.paiPlus(paiPlus, player);
+        //sixCardProfit = profit.sixCard(sixCard, player, dealer);
 
 
         gameIsRrunning = false;

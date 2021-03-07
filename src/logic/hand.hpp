@@ -29,6 +29,17 @@ enum class cardType {
     END = DIAMOND + 1
 };
 
+
+enum class handRankingAnte {
+    PAIR = 0, FLUSH, STRAIGHT,
+    THREE_OF_A_KIND, STRAIGHT_FLUSH
+};
+
+union handAnte{
+    cardValue highCard;
+    handRankingAnte hand;
+};
+
 struct hand {
     cardValue cValue;
     cardType cType;

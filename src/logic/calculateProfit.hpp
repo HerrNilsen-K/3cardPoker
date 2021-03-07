@@ -7,12 +7,14 @@
 
 
 #include <cstdint>
-#include <optional>
+#include <variant>
 #include <array>
 #include "hand.hpp"
 
 class calculateProfit {
 public:
+    std::variant<handRankingAnte, cardValue> getHandAnte(std::array<hand, 3> hand);
+
     int64_t ante(std::optional<int64_t> &ante, std::array<hand, 3>& hand);
 
 };
