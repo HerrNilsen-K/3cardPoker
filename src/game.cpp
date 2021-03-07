@@ -42,38 +42,57 @@ void game::run() {
 
         //Spread the cards
         deck.shuffleDeck();
-        std::array<hand, 3> dealer{};
+        std::array<hand, 3> dealersHand{};
         std::vector<hand> tempDealer = deck.drawCards(3);
-        std::copy(tempDealer.begin(), tempDealer.end(), dealer.data());
-        std::array<hand, 3> player{};
+        std::copy(tempDealer.begin(), tempDealer.end(), dealersHand.data());
+        std::array<hand, 3> playersHand{};
         std::vector<hand> tempPlayer = deck.drawCards(3);
-        std::copy(tempPlayer.begin(), tempPlayer.end(), player.data());
+        std::copy(tempPlayer.begin(), tempPlayer.end(), playersHand.data());
 
-        render.showPlayersCards(player);
+        render.showPlayersCards(playersHand);
         render.doesPlay();
 
 
-        //Player devides to doesPlay or not
-        char doesPlay;
-        in.doesPlay(doesPlay);
-        bool plays = (doesPlay == 'y' || doesPlay == 'Y');
-        render.showDealersCards(dealer);
+        //Player devides to playerDoesPlay or not
+        char playerDoesPlay;
+        in.doesPlay(playerDoesPlay);
+        bool plays = (playerDoesPlay == 'y' || playerDoesPlay == 'Y');
+        render.showDealersCards(dealersHand);
+
+
 
         //Calculate players profit
-        int64_t anteProfit;
-        if (plays) {
-            anteProfit = profit.ante(ante, player);
+        bool playerIsHighCard = false;
+        short playerAnteResult;
+        try {
+            playerAnteResult = static_cast<short>(std::get<handRankingAnte>(profit.getHandAnte(playersHand)));
+        } catch (std::bad_variant_access const &e) {
+            playerAnteResult = static_cast<short>(std::get<cardValue>(profit.getHandAnte(playersHand)));
+            playerIsHighCard = true;
         }
-        std::array<hand, 3> temp = {
-                {
-                        {cardValue::NINE, cardType::HEART},
-                        {cardValue::TWO, cardType::SPADES},
-                        {cardValue::SEVEN, cardType::SPADES}
-                }
-        };
 
-        //paiPlusProfit = profit.paiPlus(paiPlus, player);
-        //sixCardProfit = profit.sixCard(sixCard, player, dealer);
+        bool dealerIsHighCard = false, dealerDoesPlay = true;
+        short dealerAnteResult;
+        try {
+            dealerAnteResult = static_cast<short>(std::get<handRankingAnte>(profit.getHandAnte(dealersHand)));
+        } catch (std::bad_variant_access const &e) {
+            dealerAnteResult = static_cast<short>(std::get<cardValue>(profit.getHandAnte(dealersHand)));
+            dealerIsHighCard = true;
+            if(dealerAnteResult < static_cast<short>(cardValue::QUEEN))
+                playerDoesPlay = false;
+        }
+
+        bool dealerPlays = false;
+
+        int64_t anteProfit = 0;
+        if (plays) {
+            anteProfit = profit.ante(ante, playerAnteResult, playerIsHighCard, dealerPlays);
+        }
+
+        anteProfit += profit.anteBonusPay(ante.value(), playerAnteResult, playerIsHighCard);
+
+        //paiPlusProfit = profit.paiPlus(paiPlus, playersHand);
+        //sixCardProfit = profit.sixCard(sixCard, playersHand, dealersHand);
 
 
         gameIsRrunning = false;
