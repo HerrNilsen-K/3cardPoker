@@ -78,7 +78,7 @@ void game::run() {
         } catch (std::bad_variant_access const &e) {
             dealerAnteResult = static_cast<short>(std::get<cardValue>(profit.getHandAnte(dealersHand)));
             dealerIsHighCard = true;
-            if (dealerAnteResult < static_cast<short>(cardValue::QUEEN))
+            if(dealerAnteResult < static_cast<short>(cardValue::QUEEN))
                 playerDoesPlay = false;
         }
 
