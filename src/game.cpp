@@ -41,13 +41,29 @@ void game::run() {
 
 
         //Spread the cards
-        deck.shuffleDeck();
+        /*deck.shuffleDeck();
         std::array<hand, 3> dealersHand{};
         std::vector<hand> tempDealer = deck.drawCards(3);
         std::copy(tempDealer.begin(), tempDealer.end(), dealersHand.data());
         std::array<hand, 3> playersHand{};
         std::vector<hand> tempPlayer = deck.drawCards(3);
         std::copy(tempPlayer.begin(), tempPlayer.end(), playersHand.data());
+         */
+
+        std::array<hand, 3> playersHand = {
+                {
+                        {cardValue::TWO, cardType::HEART},
+                        {cardValue::TWO, cardType::SPADES},
+                        {cardValue::TWO, cardType::DIAMOND}
+                }
+        };
+        std::array<hand, 3> dealersHand = {
+                {
+                        {cardValue::TWO, cardType::CLUB},
+                        {cardValue::FIVE, cardType::HEART},
+                        {cardValue::QUEEN, cardType::SPADES}
+                }
+        };
 
         render.showPlayersCards(playersHand);
         render.doesPlay();
@@ -79,7 +95,7 @@ void game::run() {
             dealerAnteResult = static_cast<short>(std::get<cardValue>(profit.getHandAnte(dealersHand)));
             dealerIsHighCard = true;
             if (dealerAnteResult < static_cast<short>(cardValue::QUEEN))
-                playerDoesPlay = false;
+                dealerDoesPlay = false;
         }
 
         int64_t anteProfit = 0, pairPlusProfit = 0, sixCardProfit = 0;
@@ -91,8 +107,11 @@ void game::run() {
         pairPlusProfit += profit.pairPlusBonusPay(pairPlus.value(), playerAnteResult, playerIsHighCard);
         std::array<hand, 6> combindedCards{};
         std::copy(playersHand.begin(), playersHand.end(), combindedCards.begin());
-        std::copy(dealersHand.begin(), dealersHand.end(), combindedCards.begin());
+        std::copy(dealersHand.begin(), dealersHand.end(), combindedCards.begin() + 3);
         sixCardProfit = profit.sixCardBonusPay(sixCard.value(), combindedCards);
+
+        std::cout << "Ante profit: " << anteProfit << '.' << " Pair Plus profit: " << pairPlusProfit << '.'
+                  << " Six Card profit: " << sixCardProfit << '.' << std::flush;
 
 
         gameIsRrunning = false;

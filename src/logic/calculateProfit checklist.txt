@@ -1,0 +1,22 @@
+works w : doesn't work d
+
+ante bonus:
+    Straight Flush  w
+    3 of a kind     w
+    Straight        w
+
+
+pairPlus:
+    Straight Flush  w
+    3 of a kind     w
+    Straight        w
+    Flush           w
+    Pair            w
+
+sixCard:
+    Straight Flush  w
+    4 of a kind     w
+    Full House      d
+    Flush           w
+    Straight        w
+    3 of a kind     w

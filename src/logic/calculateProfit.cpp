@@ -22,17 +22,9 @@ std::variant<handRankingAnte, cardValue> calculateProfit::getHandAnte(std::array
 
 
 
-    //Three of a kind
-    if (value1 == value2 && value2 == value3)
-        rawResult = handRankingAnte::THREE_OF_A_KIND;
-
-        //Pair
-    else if (value1 == value2 || value2 == value3 || value1 == value3)
-        rawResult = handRankingAnte::PAIR;
-
-        //Straight Flush
-    else if ((static_cast<cardValue>(static_cast<short>(value1) + 1) == value2 &&
-              static_cast<cardValue>(static_cast<short>(value2) + 1) == value3) && (type1 == type2 && type2 == type3))
+    //Straight Flush
+    if ((static_cast<cardValue>(static_cast<short>(value1) + 1) == value2 &&
+         static_cast<cardValue>(static_cast<short>(value2) + 1) == value3) && (type1 == type2 && type2 == type3))
         rawResult = handRankingAnte::STRAIGHT_FLUSH;
 
         //Straight
@@ -44,9 +36,20 @@ std::variant<handRankingAnte, cardValue> calculateProfit::getHandAnte(std::array
     else if (type1 == type2 && type2 == type3)
         rawResult = handRankingAnte::FLUSH;
 
+        //Three of a kind
+    else if (value1 == value2 && value2 == value3)
+        rawResult = handRankingAnte::THREE_OF_A_KIND;
+
+        //Pair
+    else if (value1 == value2 || value2 == value3 || value1 == value3)
+        rawResult = handRankingAnte::PAIR;
+
         //High Card
     else
         rawResult = value3; //value 3 has the highest value
+
+
+
 
     return rawResult;
 }
@@ -57,11 +60,13 @@ int64_t calculateProfit::anteBonusPay(int64_t ante, short hand, bool isHighCard)
 
     switch (hand) {
         case static_cast<short>(handRankingAnte::STRAIGHT):
-            return ante * 2;
+            return ante + ante;
         case static_cast<short>(handRankingAnte::THREE_OF_A_KIND):
-            return ante * 5;
+            return ante * 4 + ante;
+        case static_cast<short>(handRankingAnte::STRAIGHT_FLUSH):
+            return ante * 5 + ante;
         default:
-            return ante * 6;
+            return 0;
     }
 }
 
@@ -70,16 +75,16 @@ int64_t calculateProfit::pairPlusBonusPay(int64_t pairPlus, short hand, bool isH
         return 0;
 
     switch (hand) {
-        case static_cast<short>(pairPlusRankingAnte::PAIR):
-            return pairPlus + pairPlus;
-        case static_cast<short>(pairPlusRankingAnte::FLUSH):
-            return pairPlus * 4 + pairPlus;
-        case static_cast<short>(pairPlusRankingAnte::STRAIGHT):
-            return pairPlus * 5 + pairPlus;
-        case static_cast<short>(pairPlusRankingAnte::THREE_OF_A_KIND):
-            return pairPlus * 30 + pairPlus;
         case static_cast<short>(pairPlusRankingAnte::STRAIGHT_FLUSH):
             return pairPlus * 40 + pairPlus;
+        case static_cast<short>(pairPlusRankingAnte::THREE_OF_A_KIND):
+            return pairPlus * 30 + pairPlus;
+        case static_cast<short>(pairPlusRankingAnte::STRAIGHT):
+            return pairPlus * 5 + pairPlus;
+        case static_cast<short>(pairPlusRankingAnte::FLUSH):
+            return pairPlus * 4 + pairPlus;
+        case static_cast<short>(pairPlusRankingAnte::PAIR):
+            return pairPlus + pairPlus;
         default:
             return 0;
     }
@@ -103,18 +108,19 @@ int64_t calculateProfit::sixCardBonusPay(int64_t sixCard, std::array<hand, 6> ha
     for (auto i = 0; i < t.size(); ++i)
         t[i] = hand[i].cType;
 
+    sixCard;
     //Straight Flush
     if (
             (
-                    ((static_cast<short>(v[0]) == static_cast<short>(v[1]) + 1 &&
-                      static_cast<short>(v[1]) == static_cast<short>(v[2]) + 1 &&
-                      static_cast<short>(v[2]) == static_cast<short>(v[3]) + 1 &&
-                      static_cast<short>(v[3]) == static_cast<short>(v[4]) + 1)
+                    ((static_cast<short>(v[0]) == static_cast<short>(v[1]) - 1 &&
+                      static_cast<short>(v[1]) == static_cast<short>(v[2]) - 1 &&
+                      static_cast<short>(v[2]) == static_cast<short>(v[3]) - 1 &&
+                      static_cast<short>(v[3]) == static_cast<short>(v[4]) - 1)
                      ||
-                     (static_cast<short>(v[1]) == static_cast<short>(v[2]) + 1 &&
-                      static_cast<short>(v[2]) == static_cast<short>(v[3]) + 1 &&
-                      static_cast<short>(v[3]) == static_cast<short>(v[4]) + 1 &&
-                      static_cast<short>(v[4]) == static_cast<short>(v[5]) + 1))
+                     (static_cast<short>(v[1]) == static_cast<short>(v[2]) - 1 &&
+                      static_cast<short>(v[2]) == static_cast<short>(v[3]) - 1 &&
+                      static_cast<short>(v[3]) == static_cast<short>(v[4]) - 1 &&
+                      static_cast<short>(v[4]) == static_cast<short>(v[5]) - 1))
             ) &&
             (
                     ((t[0] == t[1] && t[1] == t[2] && t[2] == t[3] && t[3] == t[4])
@@ -123,16 +129,18 @@ int64_t calculateProfit::sixCardBonusPay(int64_t sixCard, std::array<hand, 6> ha
             )
         return sixCard * 200 + sixCard;
         //Four of a kind
-    else if ((v[0] == v[1] && v[1] == v[2] && v[2] == v[3]) || (v[1] == v[2] && v[2] == v[3] && v[3] == v[4]) ||
-             (v[2] == v[3] && v[3] == v[4] && v[4] == v[5]) || (v[3] == v[4] && v[4] == v[5] && v[5] == v[6]))
+    else if (((v[0] == v[1] && v[1] == v[2] && v[2] == v[3]) || (v[1] == v[2] && v[2] == v[3] && v[3] == v[4])) ||
+             ((v[2] == v[3] && v[3] == v[4] && v[4] == v[5]) || (v[3] == v[4] && v[4] == v[5] && v[5] == v[6])))
         return sixCard * 100 + sixCard;
 
+        //Full House needs a new statement
         //Full House
-    else if ((v[0] == v[1] && v[1] == v[2]) || (v[1] == v[2] && v[2] == v[3]) || (v[2] == v[3] && v[3] == v[4]) ||
-             (v[3] == v[4] && v[4] == v[5]) || (v[4] == v[5] && v[5] == v[6]) &&
-                                               (v[0] == v[1] || v[1] == v[2] || v[2] == v[3] || v[3] == v[4] ||
-                                                v[4] == v[5]))
-        return sixCard * 25 + sixCard;
+        /*else if (((v[0] == v[1] && v[1] == v[2]) || (v[1] == v[2] && v[2] == v[3]) || (v[2] == v[3] && v[3] == v[4]) ||
+                  (v[3] == v[4] && v[4] == v[5])) &&
+                 ((v[0] == v[1] || v[1] == v[2] || v[2] == v[3] || v[3] == v[4] ||
+                   v[4] == v[5])))
+            return sixCard * 25 + sixCard;
+            */
 
         //Flush
     else if ((t[0] == t[1] && t[1] == t[2] && t[2] == t[3] && t[3] == t[4]) ||
@@ -140,14 +148,14 @@ int64_t calculateProfit::sixCardBonusPay(int64_t sixCard, std::array<hand, 6> ha
         return sixCard * 15 + sixCard;
 
         //Straight
-    else if ((static_cast<short>(v[0]) == static_cast<short>(v[1]) + 1 &&
-              static_cast<short>(v[1]) == static_cast<short>(v[2]) + 1 &&
-              static_cast<short>(v[2]) == static_cast<short>(v[3]) + 1 &&
-              static_cast<short>(v[3]) == static_cast<short>(v[4]) + 1) ||
-             (static_cast<short>(v[1]) == static_cast<short>(v[2]) + 1 &&
-              static_cast<short>(v[2]) == static_cast<short>(v[3]) + 1 &&
-              static_cast<short>(v[3]) == static_cast<short>(v[4]) + 1 &&
-              static_cast<short>(v[4]) == static_cast<short>(v[5]) + 1))
+    else if ((static_cast<short>(v[0]) == static_cast<short>(v[1]) - 1 &&
+              static_cast<short>(v[1]) == static_cast<short>(v[2]) - 1 &&
+              static_cast<short>(v[2]) == static_cast<short>(v[3]) - 1 &&
+              static_cast<short>(v[3]) == static_cast<short>(v[4]) - 1) ||
+             (static_cast<short>(v[1]) == static_cast<short>(v[2]) - 1 &&
+              static_cast<short>(v[2]) == static_cast<short>(v[3]) - 1 &&
+              static_cast<short>(v[3]) == static_cast<short>(v[4]) - 1 &&
+              static_cast<short>(v[4]) == static_cast<short>(v[5]) - 1))
         return sixCard * 10 + sixCard;
 
         //Three of a kind
