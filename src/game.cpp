@@ -41,16 +41,16 @@ void game::run() {
 
 
         //Spread the cards
-        /*deck.shuffleDeck();
+        deck.shuffleDeck();
         std::array<hand, 3> dealersHand{};
         std::vector<hand> tempDealer = deck.drawCards(3);
         std::copy(tempDealer.begin(), tempDealer.end(), dealersHand.data());
         std::array<hand, 3> playersHand{};
         std::vector<hand> tempPlayer = deck.drawCards(3);
         std::copy(tempPlayer.begin(), tempPlayer.end(), playersHand.data());
-         */
 
-        std::array<hand, 3> playersHand = {
+        //Could be usefule for later debugging
+        /*std::array<hand, 3> playersHand = {
                 {
                         {cardValue::TWO, cardType::HEART},
                         {cardValue::TWO, cardType::SPADES},
@@ -63,7 +63,7 @@ void game::run() {
                         {cardValue::FIVE, cardType::HEART},
                         {cardValue::QUEEN, cardType::SPADES}
                 }
-        };
+        };*/
 
         render.showPlayersCards(playersHand);
         render.doesPlay();
@@ -110,8 +110,12 @@ void game::run() {
         std::copy(dealersHand.begin(), dealersHand.end(), combindedCards.begin() + 3);
         sixCardProfit = profit.sixCardBonusPay(sixCard.value(), combindedCards);
 
-        std::cout << "Ante profit: " << anteProfit << '.' << " Pair Plus profit: " << pairPlusProfit << '.'
-                  << " Six Card profit: " << sixCardProfit << '.' << std::flush;
+        //Maybe usefulle for later debugging
+        //std::cout << "Ante profit: " << anteProfit << '.' << " Pair Plus profit: " << pairPlusProfit << '.'
+        //<< " Six Card profit: " << sixCardProfit << '.' << std::flush;
+
+        playersBank.changeChipsBy(anteProfit + pairPlusProfit + sixCardProfit);
+
 
 
         gameIsRrunning = false;
