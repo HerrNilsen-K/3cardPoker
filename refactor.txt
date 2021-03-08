@@ -1,2 +1,5 @@
 Remove std::optional
     I was planning to far ahead
+
+sixCardBonusPay function
+    Very unreadable if statements

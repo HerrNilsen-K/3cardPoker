@@ -85,3 +85,77 @@ int64_t calculateProfit::pairPlusBonusPay(int64_t pairPlus, short hand, bool isH
     }
 
 }
+
+int64_t calculateProfit::sixCardBonusPay(int64_t sixCard, std::array<hand, 6> hand) {
+    //Cards sorted by value
+    std::sort(hand.begin(), hand.end(), [](struct hand i, struct hand j) -> auto {
+        return i.cValue < j.cValue;
+    });
+    std::array<cardValue, 6> v{};
+    for (auto i = 0; i < v.size(); ++i)
+        v[i] = hand[i].cValue;
+
+    //Cards sorted by type
+    std::sort(hand.begin(), hand.end(), [](struct hand i, struct hand j) -> auto {
+        return i.cType < j.cType;
+    });
+    std::array<cardType, 6> t{};
+    for (auto i = 0; i < t.size(); ++i)
+        t[i] = hand[i].cType;
+
+    //Straight Flush
+    if (
+            (
+                    ((static_cast<short>(v[0]) == static_cast<short>(v[1]) + 1 &&
+                      static_cast<short>(v[1]) == static_cast<short>(v[2]) + 1 &&
+                      static_cast<short>(v[2]) == static_cast<short>(v[3]) + 1 &&
+                      static_cast<short>(v[3]) == static_cast<short>(v[4]) + 1)
+                     ||
+                     (static_cast<short>(v[1]) == static_cast<short>(v[2]) + 1 &&
+                      static_cast<short>(v[2]) == static_cast<short>(v[3]) + 1 &&
+                      static_cast<short>(v[3]) == static_cast<short>(v[4]) + 1 &&
+                      static_cast<short>(v[4]) == static_cast<short>(v[5]) + 1))
+            ) &&
+            (
+                    ((t[0] == t[1] && t[1] == t[2] && t[2] == t[3] && t[3] == t[4])
+                     ||
+                     (t[1] == t[2] && t[2] == t[3] && t[3] == t[4] && t[4] == t[5])))
+            )
+        return sixCard * 200 + sixCard;
+        //Four of a kind
+    else if ((v[0] == v[1] && v[1] == v[2] && v[2] == v[3]) || (v[1] == v[2] && v[2] == v[3] && v[3] == v[4]) ||
+             (v[2] == v[3] && v[3] == v[4] && v[4] == v[5]) || (v[3] == v[4] && v[4] == v[5] && v[5] == v[6]))
+        return sixCard * 100 + sixCard;
+
+        //Full House
+    else if ((v[0] == v[1] && v[1] == v[2]) || (v[1] == v[2] && v[2] == v[3]) || (v[2] == v[3] && v[3] == v[4]) ||
+             (v[3] == v[4] && v[4] == v[5]) || (v[4] == v[5] && v[5] == v[6]) &&
+                                               (v[0] == v[1] || v[1] == v[2] || v[2] == v[3] || v[3] == v[4] ||
+                                                v[4] == v[5]))
+        return sixCard * 25 + sixCard;
+
+        //Flush
+    else if ((t[0] == t[1] && t[1] == t[2] && t[2] == t[3] && t[3] == t[4]) ||
+             (t[1] == t[2] && t[2] == t[3] && t[3] == t[4] && t[4] == t[5]))
+        return sixCard * 15 + sixCard;
+
+        //Straight
+    else if ((static_cast<short>(v[0]) == static_cast<short>(v[1]) + 1 &&
+              static_cast<short>(v[1]) == static_cast<short>(v[2]) + 1 &&
+              static_cast<short>(v[2]) == static_cast<short>(v[3]) + 1 &&
+              static_cast<short>(v[3]) == static_cast<short>(v[4]) + 1) ||
+             (static_cast<short>(v[1]) == static_cast<short>(v[2]) + 1 &&
+              static_cast<short>(v[2]) == static_cast<short>(v[3]) + 1 &&
+              static_cast<short>(v[3]) == static_cast<short>(v[4]) + 1 &&
+              static_cast<short>(v[4]) == static_cast<short>(v[5]) + 1))
+        return sixCard * 10 + sixCard;
+
+        //Three of a kind
+    else if ((v[0] == v[1] && v[1] == v[2]) || (v[1] == v[2] && v[2] == v[3]) || (v[2] == v[3] && v[3] == v[4]) ||
+             (v[3] == v[4] && v[4] == v[5]) || (v[4] == v[5] && v[5] == v[6]))
+        return sixCard * 5 + sixCard;
+    else
+        return 0;
+
+    return 0;
+}

@@ -78,20 +78,21 @@ void game::run() {
         } catch (std::bad_variant_access const &e) {
             dealerAnteResult = static_cast<short>(std::get<cardValue>(profit.getHandAnte(dealersHand)));
             dealerIsHighCard = true;
-            if(dealerAnteResult < static_cast<short>(cardValue::QUEEN))
+            if (dealerAnteResult < static_cast<short>(cardValue::QUEEN))
                 playerDoesPlay = false;
         }
 
-        int64_t anteProfit = 0, pairPlusProfit = 0;
+        int64_t anteProfit = 0, pairPlusProfit = 0, sixCardProfit = 0;
         if (plays) {
             anteProfit = profit.ante(ante, playerAnteResult, playerIsHighCard, dealerDoesPlay);
         }
 
         anteProfit += profit.anteBonusPay(ante.value(), playerAnteResult, playerIsHighCard);
         pairPlusProfit += profit.pairPlusBonusPay(pairPlus.value(), playerAnteResult, playerIsHighCard);
-
-        //paiPlusProfit = profit.paiPlus(paiPlus, playersHand);
-        //sixCardProfit = profit.sixCard(sixCard, playersHand, dealersHand);
+        std::array<hand, 6> combindedCards{};
+        std::copy(playersHand.begin(), playersHand.end(), combindedCards.begin());
+        std::copy(dealersHand.begin(), dealersHand.end(), combindedCards.begin());
+        sixCardProfit = profit.sixCardBonusPay(sixCard.value(), combindedCards);
 
 
         gameIsRrunning = false;

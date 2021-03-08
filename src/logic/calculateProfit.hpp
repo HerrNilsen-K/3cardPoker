@@ -20,6 +20,8 @@ public:
     int64_t ante(std::optional<int64_t> &ante, short hand, bool isHighCard, bool dealerPlays);
 
     int64_t pairPlusBonusPay(int64_t pairPlus, short hand, bool isHighCard);
+
+    int64_t sixCardBonusPay(int64_t sixCard, std::array<hand, 6> hand);
 };
 
 
