@@ -35,6 +35,8 @@ enum class handRankingAnte {
     THREE_OF_A_KIND, STRAIGHT_FLUSH
 };
 
+typedef handRankingAnte pairPlusRankingAnte;
+
 union handAnte{
     cardValue highCard;
     handRankingAnte hand;

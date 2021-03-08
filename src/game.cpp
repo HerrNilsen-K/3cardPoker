@@ -82,14 +82,13 @@ void game::run() {
                 playerDoesPlay = false;
         }
 
-        bool dealerPlays = false;
-
-        int64_t anteProfit = 0;
+        int64_t anteProfit = 0, pairPlusProfit = 0;
         if (plays) {
-            anteProfit = profit.ante(ante, playerAnteResult, playerIsHighCard, dealerPlays);
+            anteProfit = profit.ante(ante, playerAnteResult, playerIsHighCard, dealerDoesPlay);
         }
 
         anteProfit += profit.anteBonusPay(ante.value(), playerAnteResult, playerIsHighCard);
+        pairPlusProfit += profit.pairPlusBonusPay(pairPlus.value(), playerAnteResult, playerIsHighCard);
 
         //paiPlusProfit = profit.paiPlus(paiPlus, playersHand);
         //sixCardProfit = profit.sixCard(sixCard, playersHand, dealersHand);

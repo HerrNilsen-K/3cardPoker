@@ -55,10 +55,33 @@ int64_t calculateProfit::anteBonusPay(int64_t ante, short hand, bool isHighCard)
     if (isHighCard)
         return 0;
 
-    if (hand == static_cast<short>(handRankingAnte::STRAIGHT))
-        return ante * 2;
-    else if (hand == static_cast<short>(handRankingAnte::THREE_OF_A_KIND))
-        return ante * 5;
-    else
-        return ante * 6;
+    switch (hand) {
+        case static_cast<short>(handRankingAnte::STRAIGHT):
+            return ante * 2;
+        case static_cast<short>(handRankingAnte::THREE_OF_A_KIND):
+            return ante * 5;
+        default:
+            return ante * 6;
+    }
+}
+
+int64_t calculateProfit::pairPlusBonusPay(int64_t pairPlus, short hand, bool isHighCard) {
+    if (isHighCard)
+        return 0;
+
+    switch (hand) {
+        case static_cast<short>(pairPlusRankingAnte::PAIR):
+            return pairPlus + pairPlus;
+        case static_cast<short>(pairPlusRankingAnte::FLUSH):
+            return pairPlus * 4 + pairPlus;
+        case static_cast<short>(pairPlusRankingAnte::STRAIGHT):
+            return pairPlus * 5 + pairPlus;
+        case static_cast<short>(pairPlusRankingAnte::THREE_OF_A_KIND):
+            return pairPlus * 30 + pairPlus;
+        case static_cast<short>(pairPlusRankingAnte::STRAIGHT_FLUSH):
+            return pairPlus * 40 + pairPlus;
+        default:
+            return 0;
+    }
+
 }
