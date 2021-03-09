@@ -28,6 +28,8 @@ public:
     void doesPlay();
 
     void showDealersCards(std::array<hand, 3> &cards);
+
+    void whoWon(bool playerWon);
 };
 
 

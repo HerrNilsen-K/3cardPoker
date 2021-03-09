@@ -99,8 +99,12 @@ void game::run() {
         }
 
         int64_t anteProfit = 0, pairPlusProfit = 0, sixCardProfit = 0;
+        bool playerHasWon = false;
         if (plays) {
-            anteProfit = profit.ante(ante, playerAnteResult, playerIsHighCard, dealerDoesPlay);
+            if (profit.playerHasWon(playerAnteResult, playerIsHighCard, dealerAnteResult, dealerIsHighCard)) {
+                anteProfit = profit.ante(ante, playerAnteResult, playerIsHighCard, dealerDoesPlay);
+                playerHasWon = true;
+            }
         }
 
         anteProfit += profit.anteBonusPay(ante.value(), playerAnteResult, playerIsHighCard);
@@ -116,8 +120,11 @@ void game::run() {
 
         playersBank.changeChipsBy(anteProfit + pairPlusProfit + sixCardProfit);
 
+        render.whoWon(playerHasWon);
+        render.currentChips(playersBank.getChips());
 
 
-        gameIsRrunning = false;
+        //gameIsRrunning = false;
+        //system("reset");
     }
 }

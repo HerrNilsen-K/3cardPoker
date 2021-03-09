@@ -15,6 +15,7 @@ class calculateProfit {
 public:
     std::variant<handRankingAnte, cardValue> getHandAnte(std::array<hand, 3> hand);
 
+    bool playerHasWon(short playerHand, bool playerIsHighCard, short dealerHand, bool dealerIsHighCard);
     int64_t anteBonusPay(int64_t ante, short hand, bool isHighCard);
 
     int64_t ante(std::optional<int64_t> &ante, short hand, bool isHighCard, bool dealerPlays);

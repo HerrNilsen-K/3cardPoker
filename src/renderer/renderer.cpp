@@ -35,3 +35,7 @@ void renderer::doesPlay() {
 void renderer::showDealersCards(std::array<hand, 3> &cards) {
     showDealersCardsImplementation(cards);
 }
+
+void renderer::whoWon(bool playerWon) {
+    whoWonImplementation(playerWon);
+}

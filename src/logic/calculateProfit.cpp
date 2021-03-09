@@ -167,3 +167,15 @@ int64_t calculateProfit::sixCardBonusPay(int64_t sixCard, std::array<hand, 6> ha
 
     return 0;
 }
+
+bool calculateProfit::playerHasWon(short playerHand, bool playerIsHighCard, short dealerHand, bool dealerIsHighCard) {
+    if(dealerIsHighCard && !playerIsHighCard)
+        return true;
+    if(!dealerIsHighCard && playerIsHighCard)
+        return false;
+
+    if(playerHand > dealerHand)
+        return true;
+
+    return false;
+}

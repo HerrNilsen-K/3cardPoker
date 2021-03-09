@@ -26,6 +26,8 @@ protected:
 
     void doesPlayImplementation();
 
+    void whoWonImplementation(bool playerWon);
+
 private:
     void drawLine();
 

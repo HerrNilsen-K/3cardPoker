@@ -47,7 +47,7 @@ void consoleRenderer::doesPlayImplementation() {
     std::cout << "Do you want to play? Y/N: ";
 }
 
-void consoleRenderer::showDealersCardsImplementation(std::array<hand, 3>& cards) {
+void consoleRenderer::showDealersCardsImplementation(std::array<hand, 3> &cards) {
     std::cout << "Dealers cards: ";
     for (int j = 0; auto &&i : cards) {
         std::tuple<std::string, std::string> card = getReadableHand(i);
@@ -55,4 +55,8 @@ void consoleRenderer::showDealersCardsImplementation(std::array<hand, 3>& cards)
         ++j;
     }
     std::cout << std::endl;
+}
+
+void consoleRenderer::whoWonImplementation(bool playerWon) {
+    std::cout << "You have " << (playerWon ? "won" : "lost") << '.' << std::endl;
 }
