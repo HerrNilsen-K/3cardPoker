@@ -3,6 +3,7 @@
 //
 
 #include <array>
+#include <climits>
 #include "game.h"
 #include "logic/cardShuffler.h"
 #include "logic/hand.hpp"
@@ -40,6 +41,7 @@ void game::run() {
         playersBank.changeChipsBy((-ante.value()) + (-pairPlus.value()) + -(sixCard.value()));
 
 
+#if 0
         //Spread the cards
         deck.shuffleDeck();
         std::array<hand, 3> dealersHand{};
@@ -49,21 +51,24 @@ void game::run() {
         std::vector<hand> tempPlayer = deck.drawCards(3);
         std::copy(tempPlayer.begin(), tempPlayer.end(), playersHand.data());
 
+#else
+
         //Could be usefule for later debugging
-        /*std::array<hand, 3> playersHand = {
+        std::array<hand, 3> playersHand = {
                 {
-                        {cardValue::TWO, cardType::HEART},
-                        {cardValue::TWO, cardType::SPADES},
+                        {cardValue::FIVE, cardType::HEART},
+                        {cardValue::EIGHT, cardType::SPADES},
                         {cardValue::TWO, cardType::DIAMOND}
                 }
         };
         std::array<hand, 3> dealersHand = {
                 {
-                        {cardValue::TWO, cardType::CLUB},
-                        {cardValue::FIVE, cardType::HEART},
-                        {cardValue::QUEEN, cardType::SPADES}
+                        {cardValue::THREE, cardType::SPADES},
+                        {cardValue::TEN, cardType::HEART},
+                        {cardValue::SIX, cardType::SPADES}
                 }
-        };*/
+        };
+#endif
 
         render.showPlayersCards(playersHand);
         render.doesPlay();
@@ -101,7 +106,7 @@ void game::run() {
         int64_t anteProfit = 0, pairPlusProfit = 0, sixCardProfit = 0;
         bool playerHasWon = false;
         if (plays) {
-            if (profit.playerHasWon(playerAnteResult, playerIsHighCard, dealerAnteResult, dealerIsHighCard)) {
+            if (profit.playerHasWon(playerAnteResult, playerIsHighCard, dealerAnteResult, dealerIsHighCard, dealerDoesPlay)) {
                 anteProfit = profit.ante(ante, playerAnteResult, playerIsHighCard, dealerDoesPlay);
                 playerHasWon = true;
             }
@@ -119,12 +124,17 @@ void game::run() {
         //<< " Six Card profit: " << sixCardProfit << '.' << std::flush;
 
         playersBank.changeChipsBy(anteProfit + pairPlusProfit + sixCardProfit);
-
         render.whoWon(playerHasWon);
-        render.currentChips(playersBank.getChips());
+
+        render.antePayout(anteProfit);
+        render.pairPlusPayout(pairPlusProfit);
+        render.sixCardPayout(sixCardProfit);
 
 
         //gameIsRrunning = false;
-        //system("reset");
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin.get();
+        system("clear");
     }
 }

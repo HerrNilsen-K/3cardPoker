@@ -8,5 +8,5 @@ loop:
     player decides to play or not
 
     game checks who won
-    player gets the chips he won
+    player gets the chips shown he won
 repeat

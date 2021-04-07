@@ -30,6 +30,12 @@ public:
     void showDealersCards(std::array<hand, 3> &cards);
 
     void whoWon(bool playerWon);
+
+    void antePayout(int64_t anteProfit);
+
+    void pairPlusPayout(int64_t pairPlusProfit);
+
+    void sixCardPayout(int64_t sixCardProfit);
 };
 
 

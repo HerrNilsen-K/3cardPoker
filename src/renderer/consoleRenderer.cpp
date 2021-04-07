@@ -6,7 +6,7 @@
 #include "consoleRenderer.hpp"
 
 void consoleRenderer::betsImplementation() {
-    std::cout << std::endl << "Please place your betsImplementation: " << std::endl;
+    std::cout << std::endl << "Please place your bets: " << std::endl;
     drawLine();
     std::cout << std::endl;
 }
@@ -59,4 +59,16 @@ void consoleRenderer::showDealersCardsImplementation(std::array<hand, 3> &cards)
 
 void consoleRenderer::whoWonImplementation(bool playerWon) {
     std::cout << "You have " << (playerWon ? "won" : "lost") << '.' << std::endl;
+}
+
+void consoleRenderer::antePayoutImplementation(int64_t anteProfit) {
+    std::cout << "Your Ante Payout: " << anteProfit << std::endl;
+}
+
+void consoleRenderer::pairPlusPayoutImplementation(int64_t pairPlusProfit) {
+    std::cout << "Your Pair Plus Payout: " << pairPlusProfit << std::endl;
+}
+
+void consoleRenderer::sixCardPayoutImplementation(int64_t sixCardProfit) {
+    std::cout << "Your Six Card Payout: " << sixCardProfit << std::endl;
 }

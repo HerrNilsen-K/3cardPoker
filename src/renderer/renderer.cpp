@@ -39,3 +39,15 @@ void renderer::showDealersCards(std::array<hand, 3> &cards) {
 void renderer::whoWon(bool playerWon) {
     whoWonImplementation(playerWon);
 }
+
+void renderer::antePayout(int64_t anteProfit) {
+    antePayoutImplementation(anteProfit);
+}
+
+void renderer::pairPlusPayout(int64_t pairPlusProfit) {
+    pairPlusPayoutImplementation(pairPlusProfit);
+}
+
+void renderer::sixCardPayout(int64_t sixCardProfit) {
+    sixCardPayoutImplementation(sixCardProfit);
+}

@@ -28,6 +28,11 @@ protected:
 
     void whoWonImplementation(bool playerWon);
 
+
+    void antePayoutImplementation(int64_t anteProfit);
+    void pairPlusPayoutImplementation(int64_t pairPlusProfit);
+    void sixCardPayoutImplementation(int64_t sixCardProfit);
+
 private:
     void drawLine();
 
