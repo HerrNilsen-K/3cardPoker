@@ -3,7 +3,7 @@
 //
 
 #include <array>
-#include <climits>
+#include <window.hpp>
 #include "game.h"
 #include "logic/cardShuffler.h"
 #include "logic/hand.hpp"
@@ -16,7 +16,6 @@
 
 
 void game::run() {
-    bool gameIsRrunning = true;
     cardShuffler cs;
     bankAccount playersBank;
     bets bet;
@@ -26,7 +25,10 @@ void game::run() {
     calculateProfit profit;
 
 
-    while (gameIsRrunning) {
+    m_window.createWindow();
+    while (!m_window.run()) {
+        glfwPollEvents();
+        glfwSwapBuffers(m_window.getHNDL());
         //Take in the players bets
         render.currentChips(playersBank.getChips());
         render.bets();
@@ -106,7 +108,8 @@ void game::run() {
         int64_t anteProfit = 0, pairPlusProfit = 0, sixCardProfit = 0;
         bool playerHasWon = false;
         if (plays) {
-            if (profit.playerHasWon(playerAnteResult, playerIsHighCard, dealerAnteResult, dealerIsHighCard, dealerDoesPlay)) {
+            if (profit.playerHasWon(playerAnteResult, playerIsHighCard, dealerAnteResult, dealerIsHighCard,
+                                    dealerDoesPlay)) {
                 anteProfit = profit.ante(ante, playerAnteResult, playerIsHighCard, dealerDoesPlay);
                 playerHasWon = true;
             }
@@ -137,4 +140,9 @@ void game::run() {
         std::cin.get();
         system("clear");
     }
+}
+
+game::game()
+        : m_window(600, 600, "3 Card Poker") {
+    m_window.init();
 }

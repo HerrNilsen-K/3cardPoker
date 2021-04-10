@@ -8,11 +8,13 @@
 
 #include <vector>
 #include <array>
+#include <window.hpp>
 
 class game {
 public:
-    game() = default;
-    static void run();
+    window m_window;
+    game();
+    void run();
 };
 
 

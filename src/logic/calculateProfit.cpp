@@ -8,7 +8,7 @@
 int64_t calculateProfit::ante(std::optional<int64_t> &ante, short hand, bool isHighCard, bool dealerPlays) {
     if (!ante.has_value())
         return 0;
-    return ante.value() * (dealerPlays ? 2 : 1.5);
+    return ante.value() * (dealerPlays ? 4 : 2);
 
 }
 
@@ -108,7 +108,6 @@ int64_t calculateProfit::sixCardBonusPay(int64_t sixCard, std::array<hand, 6> ha
     for (auto i = 0; i < t.size(); ++i)
         t[i] = hand[i].cType;
 
-    sixCard;
     //Straight Flush
     if (
             (

@@ -1,0 +1,3 @@
+[submodule "third-party/renderer"]
+	path = third-party/renderer
+	url = https://github.com/HerrNilsen-K/OpenGL_renderer.git
