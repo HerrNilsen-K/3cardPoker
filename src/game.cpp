@@ -41,7 +41,7 @@ void game::run() {
         playersBank.changeChipsBy((-ante.value()) + (-pairPlus.value()) + -(sixCard.value()));
 
 
-#if 0
+#if 1
         //Spread the cards
         deck.shuffleDeck();
         std::array<hand, 3> dealersHand{};
